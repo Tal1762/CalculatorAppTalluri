@@ -4,17 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_theme_light_primaryContainer"
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="376dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="664dp"
+        android:gravity="center_vertical|end"
+        android:text="TextView"
+        android:textColor="@color/md_theme_light_inversePrimary"
+        android:textSize="@dimen/hintTextSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textView"
-        android:layout_width="272dp"
-        android:layout_height="82dp"
-        android:layout_marginTop="72dp"
+        android:layout_width="376dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/md_theme_light_onBackground"
         android:gravity="center_vertical"
         android:text="TextView"
+        android:textColor="@color/md_theme_light_inverseOnSurface"
+        android:textSize="@dimen/viewTextSize"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,35 +40,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_editor_absoluteY="200dp">
+
         <TableRow>
 
             <Button
                 android:id="@+id/button"
+                style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:padding="@dimen/padding"
-                android:text="Button"
+                android:text="1"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="190dp" />
 
             <Button
                 android:id="@+id/button2"
+                style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:padding="@dimen/padding"
-                android:text="Button"
+                android:text="2"
                 tools:layout_editor_absoluteX="131dp"
                 tools:layout_editor_absoluteY="190dp" />
 
             <Button
                 android:id="@+id/button3"
+                style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:padding="@dimen/padding"
-                android:text="Button"
+                android:text="3"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="262dp" />
         </TableRow>
@@ -59,31 +75,28 @@
 
             <Button
                 android:id="@+id/button4"
+                style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:padding="@dimen/padding"
-                android:text="Button"
+                android:text="4"
                 tools:layout_editor_absoluteX="134dp"
                 tools:layout_editor_absoluteY="259dp" />
 
             <Button
                 android:id="@+id/button5"
+                style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:padding="@dimen/padding"
-                android:text="Button"
+                android:text="5"
                 tools:layout_editor_absoluteX="231dp"
                 tools:layout_editor_absoluteY="189dp" />
 
             <Button
                 android:id="@+id/button6"
+                style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:padding="@dimen/padding"
-                android:text="Button"
+                android:text="6"
                 tools:layout_editor_absoluteX="238dp"
                 tools:layout_editor_absoluteY="260dp" />
         </TableRow>
@@ -92,42 +105,90 @@
 
             <Button
                 android:id="@+id/button7"
+                style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:padding="@dimen/padding"
-                android:text="Button"
+                android:text="7"
                 tools:layout_editor_absoluteX="15dp"
                 tools:layout_editor_absoluteY="337dp" />
 
             <Button
                 android:id="@+id/button8"
+                style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:padding="@dimen/padding"
-                android:text="Button"
+                android:text="8"
                 tools:layout_editor_absoluteX="118dp"
                 tools:layout_editor_absoluteY="335dp" />
 
             <Button
                 android:id="@+id/button9"
+                style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:padding="@dimen/padding"
-                android:text="Button"
+                android:text="9"
                 tools:layout_editor_absoluteX="228dp"
                 tools:layout_editor_absoluteY="330dp" />
         </TableRow>
     </TableLayout>
 
     <Button
+        android:id="@+id/button13"
+        style="@style/OperatorButton"
+        android:text="÷"
+        tools:layout_editor_absoluteX="334dp"
+        tools:layout_editor_absoluteY="378dp" />
+
+    <Button
+        android:id="@+id/button11"
+        style="@style/OperatorButton"
+        android:text="-"
+        tools:layout_editor_absoluteX="334dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <Button
+        android:id="@+id/button12"
+        style="@style/OperatorButton"
+        android:text="×"
+        tools:layout_editor_absoluteX="334dp"
+        tools:layout_editor_absoluteY="318dp" />
+
+    <Button
         android:id="@+id/button10"
-        android:layout_width="58dp"
-        android:layout_height="43dp"
+        style="@style/OperatorButton"
         android:text="+"
-        tools:layout_editor_absoluteX="337dp"
-        tools:layout_editor_absoluteY="192dp" />
+        tools:layout_editor_absoluteX="334dp"
+        tools:layout_editor_absoluteY="198dp" />
+
+    <Button
+        android:id="@+id/button14"
+        style="@style/LongButton"
+        android:text="="
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="495dp" />
+
+    <Button
+        android:id="@+id/button16"
+        style="@style/OperatorButton"
+        android:text="AC"
+        tools:layout_editor_absoluteX="319dp"
+        tools:layout_editor_absoluteY="499dp" />
+
+    <Button
+        android:id="@+id/button15"
+        style="@style/OperatorButton"
+        android:text="⌫"
+        tools:layout_editor_absoluteX="259dp"
+        tools:layout_editor_absoluteY="499dp" />
+
+    <Button
+        android:id="@+id/button17"
+        style="@style/LongButton"
+        android:layout_width="wrap_content"
+        android:paddingStart="@dimen/padding"
+        android:paddingEnd="@dimen/padding"
+        android:text="More Fxns"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="605dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

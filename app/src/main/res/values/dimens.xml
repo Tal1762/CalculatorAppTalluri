@@ -2,6 +2,8 @@
 <resources>
     <dimen name="viewTextSize">40sp</dimen>
     <dimen name="hintTextSize">32sp</dimen>
-    <dimen name="margin">8dp</dimen>
+    <dimen name="buttonTextSize">25sp</dimen>
+    <dimen name="marginSides">8dp</dimen>
+    <dimen name="marginTopBottom">4dp</dimen>
     <dimen name="padding">15dp</dimen>
 </resources>

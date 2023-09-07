@@ -30,4 +30,32 @@
     </style>
 
     <style name="Theme.CalculatorAppTalluri" parent="Base.Theme.CalculatorAppTalluri" />
+
+    <style name="RectButton" parent="Widget.AppCompat.Button">
+        <item name="android:padding">@dimen/padding</item>
+        <item name="android:layout_marginTop">@dimen/marginTopBottom</item>
+        <item name="android:layout_marginBottom">@dimen/marginTopBottom</item>
+        <item name="android:layout_marginRight">@dimen/marginSides</item>
+        <item name="android:layout_marginLeft">@dimen/marginSides</item>
+        <item name="backgroundTint">@color/md_theme_light_primary</item>
+        <item name="android:textColor">@color/md_theme_light_primaryContainer</item>
+        <item name="android:textSize">@dimen/buttonTextSize</item>
+    </style>
+
+    <style name="LongButton" parent="RectButton">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_width">200dp</item>
+        <item name="android:textSize">@dimen/viewTextSize</item>
+        <item name="android:layout_height">70dp</item>
+    </style>
+    
+    <style name="OperatorButton" parent="RectButton">
+        <item name="android:padding">0dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+    </style>
 </resources>

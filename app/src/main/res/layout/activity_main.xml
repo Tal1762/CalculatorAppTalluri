@@ -8,27 +8,14 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="376dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="664dp"
-        android:gravity="center_vertical|end"
-        android:text="TextView"
-        android:textColor="@color/md_theme_light_inversePrimary"
-        android:textSize="@dimen/hintTextSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
+        android:id="@+id/inputView"
         android:layout_width="376dp"
         android:layout_height="130dp"
         android:layout_marginTop="44dp"
         android:background="@color/md_theme_light_onBackground"
         android:gravity="center_vertical"
-        android:text="TextView"
+        android:paddingStart="@dimen/padding"
+        android:text="0"
         android:textColor="@color/md_theme_light_inverseOnSurface"
         android:textSize="@dimen/viewTextSize"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,96 +23,130 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_editor_absoluteY="200dp">
+    <TextView
+        android:id="@+id/outputView"
+        android:paddingEnd="@dimen/padding"
+        android:layout_width="376dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="44dp"
+        android:gravity="center_vertical|end"
+        android:text="TextView"
+        android:textColor="#CCFFB3B4"
+        android:textSize="@dimen/hintTextSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow>
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="318dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/minusBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputView">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/number1Btn"
                 style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="number1Input"
                 android:text="1"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="190dp" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/number2Btn"
                 style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="number2Input"
                 android:text="2"
                 tools:layout_editor_absoluteX="131dp"
                 tools:layout_editor_absoluteY="190dp" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/number3Btn"
                 style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="number3Input"
                 android:text="3"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="262dp" />
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/number4Btn"
                 style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="number4Input"
                 android:text="4"
                 tools:layout_editor_absoluteX="134dp"
                 tools:layout_editor_absoluteY="259dp" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/number5Btn"
                 style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="number5Input"
                 android:text="5"
                 tools:layout_editor_absoluteX="231dp"
                 tools:layout_editor_absoluteY="189dp" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/number6Btn"
                 style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="number6Input"
                 android:text="6"
                 tools:layout_editor_absoluteX="238dp"
                 tools:layout_editor_absoluteY="260dp" />
         </TableRow>
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/number7Btn"
                 style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="number7Input"
                 android:text="7"
                 tools:layout_editor_absoluteX="15dp"
                 tools:layout_editor_absoluteY="337dp" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/number8Btn"
                 style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="number8Input"
                 android:text="8"
                 tools:layout_editor_absoluteX="118dp"
                 tools:layout_editor_absoluteY="335dp" />
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/number9Btn"
                 style="@style/RectButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="number9Input"
                 android:text="9"
                 tools:layout_editor_absoluteX="228dp"
                 tools:layout_editor_absoluteY="330dp" />
@@ -133,62 +154,92 @@
     </TableLayout>
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/divideBtn"
         style="@style/OperatorButton"
+        android:layout_marginEnd="16dp"
         android:text="÷"
-        tools:layout_editor_absoluteX="334dp"
-        tools:layout_editor_absoluteY="378dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multiplyBtn" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/minusBtn"
         style="@style/OperatorButton"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
         android:text="-"
-        tools:layout_editor_absoluteX="334dp"
-        tools:layout_editor_absoluteY="258dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plusBtn" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/multiplyBtn"
         style="@style/OperatorButton"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
         android:text="×"
-        tools:layout_editor_absoluteX="334dp"
-        tools:layout_editor_absoluteY="318dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/minusBtn" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/plusBtn"
         style="@style/OperatorButton"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="+"
-        tools:layout_editor_absoluteX="334dp"
-        tools:layout_editor_absoluteY="198dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputView" />
 
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/clearBtn"
+        style="@style/OperatorButton"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="16dp"
+        android:text="AC"
+        app:layout_constraintBottom_toTopOf="@+id/moreBtn"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/backspaceBtn"
+        style="@style/OperatorButton"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="16dp"
+        android:text="⌫"
+        app:layout_constraintBottom_toTopOf="@+id/moreBtn"
+        app:layout_constraintEnd_toStartOf="@+id/clearBtn" />
+
+    <Button
+        android:id="@+id/enterBtn"
         style="@style/LongButton"
         android:text="="
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="495dp" />
+        app:layout_constraintBottom_toTopOf="@+id/moreBtn"
+        app:layout_constraintEnd_toStartOf="@+id/backspaceBtn"
+        app:layout_constraintHorizontal_bias="0.627"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/number0Btn"
+        app:layout_constraintVertical_bias="0.836" />
 
     <Button
-        android:id="@+id/button16"
-        style="@style/OperatorButton"
-        android:text="AC"
-        tools:layout_editor_absoluteX="319dp"
-        tools:layout_editor_absoluteY="499dp" />
-
-    <Button
-        android:id="@+id/button15"
-        style="@style/OperatorButton"
-        android:text="⌫"
-        tools:layout_editor_absoluteX="259dp"
-        tools:layout_editor_absoluteY="499dp" />
-
-    <Button
-        android:id="@+id/button17"
+        android:id="@+id/moreBtn"
         style="@style/LongButton"
         android:layout_width="wrap_content"
+        android:layout_marginBottom="52dp"
         android:paddingStart="@dimen/padding"
         android:paddingEnd="@dimen/padding"
         android:text="More Fxns"
-        tools:layout_editor_absoluteX="80dp"
-        tools:layout_editor_absoluteY="605dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/number0Btn"
+        style="@style/RectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="number0Input"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.368"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

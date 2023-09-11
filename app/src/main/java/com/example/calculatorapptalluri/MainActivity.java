@@ -8,7 +8,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+    private static ArrayList<String> inputLine = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,83 +19,118 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void number1Input(View v){
+    public void inputNum(int n){
         TextView inputTV = findViewById(R.id.inputView);
         if (inputTV.getText().equals("0")){
-            inputTV.setText("1");
+            inputTV.setText("" + n);
         }
-        inputTV.setText(inputTV.getText() + "1");
+        else{
+            inputTV.setText("" + inputTV.getText() + n);
+        }
+        inputLine.set(inputLine.size()-1, inputLine.get(inputLine.size()-1) + n);
+    }
+
+    public boolean equalsOperator(String s){
+        if (!s.endsWith("+") &&
+                !s.endsWith("-") &&
+                !s.endsWith("×") &&
+                !s.endsWith("÷") &&
+                !s.endsWith("√") &&
+                !s.endsWith("^") &&
+                !s.endsWith("%") &&
+                !s.endsWith("ln")){
+            return false;
+        }
+        return true;
+    }
+
+    public void inputOperator(String s){
+        TextView inputTV = findViewById(R.id.inputView);
+        if (!inputTV.getText().equals("0") &&
+                equalsOperator((String)inputTV.getText())){
+            inputLine.add(s);
+            inputTV.setText(inputTV.getText() + s);
+        }
+    }
+
+    public void findAndCalc(String op){
+        for (int i=0; i<inputLine.size(); i++){
+            if (inputLine.get(i).equals(op)){
+                
+            }
+        }
+    }
+
+    public void plusInput(View v){
+        inputOperator("+");
+    }
+
+    public void minusInput(View v){
+        inputOperator("-");
+    }
+
+    public void multiplyInput(View v){
+        inputOperator("×");
+    }
+
+    public void divideInput(View v){
+        inputOperator("÷");
+    }
+
+    public void number1Input(View v){
+        inputNum(1);
     }
 
     public void number2Input(View v){
-        TextView inputTV = findViewById(R.id.inputView);
-        if (inputTV.getText().equals("0")){
-            inputTV.setText("2");
-        }
-        inputTV.setText(inputTV.getText() + "2");
+        inputNum(2);
     }
 
     public void number3Input(View v){
-        TextView inputTV = findViewById(R.id.inputView);
-        if (inputTV.getText().equals("0")){
-            inputTV.setText("3");
-        }
-        inputTV.setText(inputTV.getText() + "3");
+        inputNum(3);
     }
 
     public void number4Input(View v){
-        TextView inputTV = findViewById(R.id.inputView);
-        if (inputTV.getText().equals("0")){
-            inputTV.setText("4");
-        }
-        inputTV.setText(inputTV.getText() + "4");
+        inputNum(4);
     }
 
     public void number5Input(View v){
-        TextView inputTV = findViewById(R.id.inputView);
-        if (inputTV.getText().equals("0")){
-            inputTV.setText("5");
-        }
-        inputTV.setText(inputTV.getText() + "5");
+        inputNum(5);
     }
 
     public void number6Input(View v){
-        TextView inputTV = findViewById(R.id.inputView);
-        if (inputTV.getText().equals("0")){
-            inputTV.setText("6");
-        }
-        inputTV.setText(inputTV.getText() + "6");
+        inputNum(6);
     }
 
     public void number7Input(View v){
-        TextView inputTV = findViewById(R.id.inputView);
-        if (inputTV.getText().equals("0")){
-            inputTV.setText("7");
-        }
-        inputTV.setText(inputTV.getText() + "7");
+        inputNum(7);
     }
 
     public void number8Input(View v){
-        TextView inputTV = findViewById(R.id.inputView);
-        if (inputTV.getText().equals("0")){
-            inputTV.setText("8");
-        }
-        inputTV.setText(inputTV.getText() + "8");
+        inputNum(8);
     }
 
     public void number9Input(View v){
-        TextView inputTV = findViewById(R.id.inputView);
-        if (inputTV.getText().equals("0")){
-            inputTV.setText("9");
-        }
-        inputTV.setText(inputTV.getText() + "9");
+        inputNum(9);
     }
 
     public void number0Input(View v){
-        TextView inputTV = findViewById(R.id.inputView);
-        if (inputTV.getText().equals("0")){
-            inputTV.setText("0");
+        inputNum(0);
+    }
+
+    public void backspace(View v){
+        if (inputLine.size() > 0){
+            TextView inputTV = findViewById(R.id.inputView);
+            inputLine.remove(inputLine.size()-1);
+            inputTV.setText(((String)inputTV.getText()).substring(0, inputTV.getText().length()-1));
+            if (inputTV.getText().equals("")){
+                inputTV.setText("0");
+            }
         }
-        inputTV.setText(inputTV.getText() + "0");
+    }
+
+    public void clearAll(View v){
+        TextView inputTV = findViewById(R.id.inputView);
+        inputLine.clear();
+        inputTV.setText("0");
     }
 }

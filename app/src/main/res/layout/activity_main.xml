@@ -157,6 +157,7 @@
         android:id="@+id/divideBtn"
         style="@style/OperatorButton"
         android:layout_marginEnd="16dp"
+        android:onClick="divideInput"
         android:text="÷"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/multiplyBtn" />
@@ -166,6 +167,7 @@
         style="@style/OperatorButton"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
+        android:onClick="minusInput"
         android:text="-"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plusBtn" />
@@ -175,6 +177,7 @@
         style="@style/OperatorButton"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
+        android:onClick="multiplyInput"
         android:text="×"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/minusBtn" />
@@ -184,6 +187,7 @@
         style="@style/OperatorButton"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:onClick="plusInput"
         android:text="+"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputView" />
@@ -193,6 +197,7 @@
         style="@style/OperatorButton"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
+        android:onClick="clearAll"
         android:text="AC"
         app:layout_constraintBottom_toTopOf="@+id/moreBtn"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -202,6 +207,7 @@
         style="@style/OperatorButton"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
+        android:onClick="backspace"
         android:text="⌫"
         app:layout_constraintBottom_toTopOf="@+id/moreBtn"
         app:layout_constraintEnd_toStartOf="@+id/clearBtn" />

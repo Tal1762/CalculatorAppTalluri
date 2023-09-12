@@ -215,6 +215,7 @@
     <Button
         android:id="@+id/enterBtn"
         style="@style/LongButton"
+        android:onClick="printResult"
         android:text="="
         app:layout_constraintBottom_toTopOf="@+id/moreBtn"
         app:layout_constraintEnd_toStartOf="@+id/backspaceBtn"

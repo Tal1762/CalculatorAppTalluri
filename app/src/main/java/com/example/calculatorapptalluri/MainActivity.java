@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             inputTV.setText("" + inputTV.getText() + n);
         }
-        if (inputLine.size() != 0) {
+        if (inputLine.size() != 0 && !equalsOperator(inputLine.get(inputLine.size()-1))) {
             inputLine.set(inputLine.size() - 1, inputLine.get(inputLine.size() - 1) + n);
         }
         else{
@@ -58,42 +58,42 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void findAndCalc(String op){
+    public void findAndCalc(String op, boolean isHint){
         for (int i=0; i<inputLine.size(); i++){
             if (inputLine.get(i).equals(op)){
                 if (op.equals("+")) {
                     inputLine.set(i - 1, "" + (Integer.parseInt(inputLine.get(i-1)) + Integer.parseInt(inputLine.get(i+1))));
                     inputLine.remove(i);
-                    inputLine.remove(i+1);
+                    inputLine.remove(i);
                 }
                 else if (op.equals("-")) {
                     inputLine.set(i - 1, "" + (Integer.parseInt(inputLine.get(i-1)) - Integer.parseInt(inputLine.get(i+1))));
                     inputLine.remove(i);
-                    inputLine.remove(i+1);
+                    inputLine.remove(i);
                 }
                 else if (op.equals("×")) {
                     inputLine.set(i - 1, "" + (Integer.parseInt(inputLine.get(i-1)) * Integer.parseInt(inputLine.get(i+1))));
                     inputLine.remove(i);
-                    inputLine.remove(i+1);
+                    inputLine.remove(i);
                 }
                 else if (op.equals("÷")) {
-                    inputLine.set(i - 1, "" + (Integer.parseInt(inputLine.get(i-1)) / Integer.parseInt(inputLine.get(i+1))));
+                    inputLine.set(i - 1, "" + ((double) Integer.parseInt(inputLine.get(i-1)) / Integer.parseInt(inputLine.get(i+1))));
                     inputLine.remove(i);
-                    inputLine.remove(i+1);
+                    inputLine.remove(i);
                 }
                 else if (op.equals("√")) {
                     inputLine.set(i, "" + Math.sqrt(Integer.parseInt(inputLine.get(i+1))));
                     inputLine.remove(i+1);
                 }
                 else if (op.equals("^")) {
-                    inputLine.set(i - 1, "" + Math.round(Math.pow(Integer.parseInt(inputLine.get(i-1)), Integer.parseInt(inputLine.get(i+1)))));
+                    inputLine.set(i - 1, "" + Math.pow(Integer.parseInt(inputLine.get(i-1)), Integer.parseInt(inputLine.get(i+1))));
                     inputLine.remove(i);
-                    inputLine.remove(i+1);
+                    inputLine.remove(i);
                 }
                 else if (op.equals("%")) {
                     inputLine.set(i - 1, "" + (Integer.parseInt(inputLine.get(i-1)) % Integer.parseInt(inputLine.get(i+1))));
                     inputLine.remove(i);
-                    inputLine.remove(i+1);
+                    inputLine.remove(i);
                 }
                 else if (op.equals("ln")) {
                     inputLine.set(i, "" + Math.log(Integer.parseInt(inputLine.get(i+1))));
@@ -106,11 +106,11 @@ public class MainActivity extends AppCompatActivity {
     public void printResult(View v){
         if (inputLine.size() > 0) {
             TextView outputTV = findViewById(R.id.outputView);
-            findAndCalc("ln");
-            findAndCalc("√");
-            findAndCalc("^");
-            findAndCalc("%");
-            findAndCalc("÷");
+            findAndCalc("ln", false);
+            findAndCalc("√", false);
+            findAndCalc("^", false);
+            findAndCalc("%", false);
+            findAndCalc("÷", false);
             findAndCalc("×");
             findAndCalc("-");
             findAndCalc("+");
@@ -136,42 +136,52 @@ public class MainActivity extends AppCompatActivity {
 
     public void number1Input(View v){
         inputNum(1);
+        printResult(v);
     }
 
     public void number2Input(View v){
         inputNum(2);
+        printResult(v);
     }
 
     public void number3Input(View v){
         inputNum(3);
+        printResult(v);
     }
 
     public void number4Input(View v){
         inputNum(4);
+        printResult(v);
     }
 
     public void number5Input(View v){
         inputNum(5);
+        printResult(v);
     }
 
     public void number6Input(View v){
         inputNum(6);
+        printResult(v);
     }
 
     public void number7Input(View v){
         inputNum(7);
+        printResult(v);
     }
 
     public void number8Input(View v){
         inputNum(8);
+        printResult(v);
     }
 
     public void number9Input(View v){
         inputNum(9);
+        printResult(v);
     }
 
     public void number0Input(View v){
         inputNum(0);
+        printResult(v);
     }
 
     public void backspace(View v){
@@ -183,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 inputTV.setText("0");
             }
         }
+        printResult(v);
     }
 
     public void clearAll(View v){

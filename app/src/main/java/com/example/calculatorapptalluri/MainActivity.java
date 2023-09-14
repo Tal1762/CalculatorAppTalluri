@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 !inputLine.get(inputLine.size()-1).equals("0")) {
             inputLine.set(inputLine.size() - 1, inputLine.get(inputLine.size() - 1) + n);
         }
-        else if (inputLine.get(inputLine.size()-1).equals("0")){
+        else if (inputLine.size() != 0 && inputLine.get(inputLine.size()-1).equals("0")){
             inputLine.set(inputLine.size() - 1, "" + n);
         }
         else{
@@ -77,7 +77,12 @@ public class MainActivity extends AppCompatActivity {
             inputTV.setText(inputTV.getText() + s);
         }
         else if (inputTV.getText().equals("0") && (s.equals("√") || s.equals("ln"))){
-            inputLine.add(s);
+            if (inputLine.size() == 1) {
+                inputLine.set(0, s);
+            }
+            else{
+                inputLine.add(s);
+            }
             inputTV.setText(s);
         }
         else if (!inputTV.getText().equals("0")
@@ -102,21 +107,25 @@ public class MainActivity extends AppCompatActivity {
                     inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) + Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
+                    i-=1;
                 }
                 else if (op.equals("-")) {
                     inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) - Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
+                    i-=1;
                 }
                 else if (op.equals("×")) {
                     inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) * Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
+                    i-=1;
                 }
                 else if (op.equals("÷")) {
                     inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) / Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
+                    i-=1;
                 }
                 else if (op.equals("√")) {
                     inputLine.set(i, "" + Math.sqrt(Double.parseDouble(inputLine.get(i+1))));
@@ -126,11 +135,13 @@ public class MainActivity extends AppCompatActivity {
                     inputLine.set(i - 1, "" + Math.pow(Double.parseDouble(inputLine.get(i-1)), Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
+                    i-=1;
                 }
                 else if (op.equals("%")) {
                     inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) % Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
+                    i-=1;
                 }
                 else if (op.equals("ln")) {
                     inputLine.set(i, "" + Math.log(Double.parseDouble(inputLine.get(i+1))));
@@ -156,13 +167,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void hintResult(View v){
         TextView outputTV = findViewById(R.id.outputView);
-        TextView inputTV = findViewById(R.id.inputView);
         ArrayList<String> tempLine = new ArrayList<>();
         for (String s : inputLine){
             tempLine.add(s);
         }
         if (inputLine.size() > 0) {
-            while (equalsOperator(tempLine.get(tempLine.size()-1))){
+            while (tempLine.size() > 0 && equalsOperator(tempLine.get(tempLine.size()-1))){
                 tempLine.remove(tempLine.size()-1);
             }
             findAndCalc("ln", tempLine);
@@ -183,6 +193,11 @@ public class MainActivity extends AppCompatActivity {
         else {
             outputTV.setText("0.0");
         }
+        if (outputTV.getText().equals("-Infinity") ||
+            outputTV.getText().equals("Infinity") ||
+            outputTV.getText().equals("-Infinity")){
+            outputTV.setText("No Real Solution");
+        }
     }
 
     public void plusInput(View v){
@@ -190,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
         if (plusTV.getText().equals("+")) {
             inputOperator("+");
         }
-        else{
+        else if (!enterPressed){
             inputOperator("√");
         }
     }
@@ -220,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
         if (divideTV.getText().equals("÷")) {
             inputOperator("÷");
         }
-        else{
+        else if (!enterPressed){
             inputOperator("ln");
         }
     }

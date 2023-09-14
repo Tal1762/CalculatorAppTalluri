@@ -1,7 +1,9 @@
 package com.example.calculatorapptalluri;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private static ArrayList<String> inputLine = new ArrayList<>();
+    boolean enterPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +22,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void inputNum(int n){
+    public void inputNum(View v, int n){
         TextView inputTV = findViewById(R.id.inputView);
+        TextView outputTV = findViewById(R.id.outputView);
+        if (enterPressed) {
+            outputTV.setTextSize(24);
+            ColorStateList c = outputTV.getTextColors();
+            outputTV.setTextColor(inputTV.getTextColors());
+            inputTV.setTextSize(32);
+            inputTV.setTextColor(c);
+            enterPressed = false;
+            clearAll(v);
+        }
         if (inputTV.getText().equals("0")){
             inputTV.setText("" + n);
         }
         else{
             inputTV.setText("" + inputTV.getText() + n);
         }
-        if (inputLine.size() != 0 && !equalsOperator(inputLine.get(inputLine.size()-1))) {
+        if (inputLine.size() != 0 &&
+                !equalsOperator(inputLine.get(inputLine.size()-1)) &&
+                !inputLine.get(inputLine.size()-1).equals("0")) {
             inputLine.set(inputLine.size() - 1, inputLine.get(inputLine.size() - 1) + n);
+        }
+        else if (inputLine.get(inputLine.size()-1).equals("0")){
+            inputLine.set(inputLine.size() - 1, "" + n);
         }
         else{
             inputLine.add("" + n);
@@ -36,14 +54,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean equalsOperator(String s){
-        if (!s.endsWith("+") &&
-                !s.endsWith("-") &&
-                !s.endsWith("×") &&
-                !s.endsWith("÷") &&
-                !s.endsWith("√") &&
-                !s.endsWith("^") &&
-                !s.endsWith("%") &&
-                !s.endsWith("ln")){
+        if (!s.equals("+") &&
+                !s.equals("-") &&
+                !s.equals("×") &&
+                !s.equals("÷") &&
+                !s.equals("^") &&
+                !s.equals("√") &&
+                !s.equals("ln") &&
+                !s.equals("%")){
             return false;
         }
         return true;
@@ -52,51 +70,70 @@ public class MainActivity extends AppCompatActivity {
     public void inputOperator(String s){
         TextView inputTV = findViewById(R.id.inputView);
         if (!inputTV.getText().equals("0") &&
-                !equalsOperator((String)inputTV.getText())){
+                !equalsOperator((String)inputTV.getText()) &&
+                !s.equals("√") &&
+                !s.equals("ln")){
+            inputLine.add(s);
+            inputTV.setText(inputTV.getText() + s);
+        }
+        else if (inputTV.getText().equals("0") && (s.equals("√") || s.equals("ln"))){
+            inputLine.add(s);
+            inputTV.setText(s);
+        }
+        else if (!inputTV.getText().equals("0")
+                    && (s.equals("√") || s.equals("ln"))
+                    && !equalsOperator(inputTV.getText().toString().substring(inputTV.getText().length()-1))){
+            inputLine.add("×");
+            inputLine.add(s);
+            inputTV.setText(inputTV.getText() + "×" + s);
+        }
+        else if (!inputTV.getText().equals("0")
+                && (s.equals("√") || s.equals("ln"))
+                && equalsOperator(inputTV.getText().toString().substring(inputTV.getText().length()-1))){
             inputLine.add(s);
             inputTV.setText(inputTV.getText() + s);
         }
     }
 
-    public void findAndCalc(String op, boolean isHint){
+    public void findAndCalc(String op, ArrayList<String> inputLine){
         for (int i=0; i<inputLine.size(); i++){
             if (inputLine.get(i).equals(op)){
                 if (op.equals("+")) {
-                    inputLine.set(i - 1, "" + (Integer.parseInt(inputLine.get(i-1)) + Integer.parseInt(inputLine.get(i+1))));
+                    inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) + Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
                 }
                 else if (op.equals("-")) {
-                    inputLine.set(i - 1, "" + (Integer.parseInt(inputLine.get(i-1)) - Integer.parseInt(inputLine.get(i+1))));
+                    inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) - Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
                 }
                 else if (op.equals("×")) {
-                    inputLine.set(i - 1, "" + (Integer.parseInt(inputLine.get(i-1)) * Integer.parseInt(inputLine.get(i+1))));
+                    inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) * Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
                 }
                 else if (op.equals("÷")) {
-                    inputLine.set(i - 1, "" + ((double) Integer.parseInt(inputLine.get(i-1)) / Integer.parseInt(inputLine.get(i+1))));
+                    inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) / Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
                 }
                 else if (op.equals("√")) {
-                    inputLine.set(i, "" + Math.sqrt(Integer.parseInt(inputLine.get(i+1))));
+                    inputLine.set(i, "" + Math.sqrt(Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i+1);
                 }
                 else if (op.equals("^")) {
-                    inputLine.set(i - 1, "" + Math.pow(Integer.parseInt(inputLine.get(i-1)), Integer.parseInt(inputLine.get(i+1))));
+                    inputLine.set(i - 1, "" + Math.pow(Double.parseDouble(inputLine.get(i-1)), Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
                 }
                 else if (op.equals("%")) {
-                    inputLine.set(i - 1, "" + (Integer.parseInt(inputLine.get(i-1)) % Integer.parseInt(inputLine.get(i+1))));
+                    inputLine.set(i - 1, "" + (Double.parseDouble(inputLine.get(i-1)) % Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i);
                     inputLine.remove(i);
                 }
                 else if (op.equals("ln")) {
-                    inputLine.set(i, "" + Math.log(Integer.parseInt(inputLine.get(i+1))));
+                    inputLine.set(i, "" + Math.log(Double.parseDouble(inputLine.get(i+1))));
                     inputLine.remove(i+1);
                 }
             }
@@ -104,101 +141,217 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void printResult(View v){
+        TextView outputTV = findViewById(R.id.outputView);
+        TextView inputTV = findViewById(R.id.inputView);
+
+        if (!enterPressed) {
+            inputTV.setTextSize(24);
+            ColorStateList c = inputTV.getTextColors();
+            inputTV.setTextColor(outputTV.getTextColors());
+            outputTV.setTextSize(32);
+            outputTV.setTextColor(c);
+            enterPressed = true;
+        }
+    }
+
+    public void hintResult(View v){
+        TextView outputTV = findViewById(R.id.outputView);
+        TextView inputTV = findViewById(R.id.inputView);
+        ArrayList<String> tempLine = new ArrayList<>();
+        for (String s : inputLine){
+            tempLine.add(s);
+        }
         if (inputLine.size() > 0) {
-            TextView outputTV = findViewById(R.id.outputView);
-            findAndCalc("ln", false);
-            findAndCalc("√", false);
-            findAndCalc("^", false);
-            findAndCalc("%", false);
-            findAndCalc("÷", false);
-            findAndCalc("×");
-            findAndCalc("-");
-            findAndCalc("+");
-            outputTV.setText(inputLine.get(0));
+            while (equalsOperator(tempLine.get(tempLine.size()-1))){
+                tempLine.remove(tempLine.size()-1);
+            }
+            findAndCalc("ln", tempLine);
+            findAndCalc("√", tempLine);
+            findAndCalc("^", tempLine);
+            findAndCalc("%", tempLine);
+            findAndCalc("÷", tempLine);
+            findAndCalc("×", tempLine);
+            findAndCalc("-", tempLine);
+            findAndCalc("+", tempLine);
+            if (tempLine.size() > 0 && !tempLine.get(0).equals("")) {
+                outputTV.setText("" + Double.parseDouble(tempLine.get(0)));
+            }
+            else{
+                outputTV.setText("0.0");
+            }
+        }
+        else {
+            outputTV.setText("0.0");
         }
     }
 
     public void plusInput(View v){
-        inputOperator("+");
+        TextView plusTV = findViewById(R.id.plusBtn);
+        if (plusTV.getText().equals("+")) {
+            inputOperator("+");
+        }
+        else{
+            inputOperator("√");
+        }
     }
 
     public void minusInput(View v){
-        inputOperator("-");
+        TextView minusTV = findViewById(R.id.minusBtn);
+        if (minusTV.getText().equals("-")) {
+            inputOperator("-");
+        }
+        else{
+            inputOperator("^");
+        }
     }
 
     public void multiplyInput(View v){
-        inputOperator("×");
+        TextView multiplyTV = findViewById(R.id.multiplyBtn);
+        if (multiplyTV.getText().equals("×")) {
+            inputOperator("×");
+        }
+        else{
+            inputOperator("%");
+        }
     }
 
     public void divideInput(View v){
-        inputOperator("÷");
+        TextView divideTV = findViewById(R.id.divideBtn);
+        if (divideTV.getText().equals("÷")) {
+            inputOperator("÷");
+        }
+        else{
+            inputOperator("ln");
+        }
+    }
+
+    public void switchFxns(View v){
+        TextView plusTV = findViewById(R.id.plusBtn);
+        TextView minusTV = findViewById(R.id.minusBtn);
+        TextView multiplyTV = findViewById(R.id.multiplyBtn);
+        TextView divideTV = findViewById(R.id.divideBtn);
+        TextView moreFxnsTV = findViewById(R.id.moreBtn);
+        if (plusTV.getText().equals("+")) {
+            plusTV.setText("√");
+            minusTV.setText("^");
+            multiplyTV.setText("%");
+            divideTV.setText("ln");
+            moreFxnsTV.setText("Back");
+        }
+        else {
+            plusTV.setText("+");
+            minusTV.setText("-");
+            multiplyTV.setText("×");
+            divideTV.setText("÷");
+            moreFxnsTV.setText("More Fxns");
+        }
     }
 
     public void number1Input(View v){
-        inputNum(1);
-        printResult(v);
+        inputNum(v, 1);
+        hintResult(v);
     }
 
     public void number2Input(View v){
-        inputNum(2);
-        printResult(v);
+        inputNum(v, 2);
+        hintResult(v);
     }
 
     public void number3Input(View v){
-        inputNum(3);
-        printResult(v);
+        inputNum(v, 3);
+        hintResult(v);
     }
 
     public void number4Input(View v){
-        inputNum(4);
-        printResult(v);
+        inputNum(v, 4);
+        hintResult(v);
     }
 
     public void number5Input(View v){
-        inputNum(5);
-        printResult(v);
+        inputNum(v, 5);
+        hintResult(v);
     }
 
     public void number6Input(View v){
-        inputNum(6);
-        printResult(v);
+        inputNum(v, 6);
+        hintResult(v);
     }
 
     public void number7Input(View v){
-        inputNum(7);
-        printResult(v);
+        inputNum(v, 7);
+        hintResult(v);
     }
 
     public void number8Input(View v){
-        inputNum(8);
-        printResult(v);
+        inputNum(v, 8);
+        hintResult(v);
     }
 
     public void number9Input(View v){
-        inputNum(9);
-        printResult(v);
+        inputNum(v, 9);
+        hintResult(v);
     }
 
     public void number0Input(View v){
-        inputNum(0);
-        printResult(v);
+        inputNum(v, 0);
+        hintResult(v);
     }
 
     public void backspace(View v){
-        if (inputLine.size() > 0){
-            TextView inputTV = findViewById(R.id.inputView);
-            inputLine.remove(inputLine.size()-1);
-            inputTV.setText(((String)inputTV.getText()).substring(0, inputTV.getText().length()-1));
+        TextView inputTV = findViewById(R.id.inputView);
+        TextView outputTV = findViewById(R.id.outputView);
+        if (enterPressed) {
+            outputTV.setTextSize(24);
+            ColorStateList c = outputTV.getTextColors();
+            outputTV.setTextColor(inputTV.getTextColors());
+            inputTV.setTextSize(32);
+            inputTV.setTextColor(c);
+            enterPressed = false;
+            clearAll(v);
+        }
+        if (inputLine.size() != 0){
+            if (inputTV.getText().length() > 1 &&
+                    ((String)inputTV.getText()).substring(inputTV.getText().length()-2).equals("ln")){
+                inputTV.setText(((String)inputTV.getText()).substring(0, inputTV.getText().length()-1));
+            }
+            inputTV.setText(((String) inputTV.getText()).substring(0, inputTV.getText().length() - 1));
             if (inputTV.getText().equals("")){
                 inputTV.setText("0");
+                inputLine.clear();
+                inputLine.add("0");
+            }
+            if (!inputLine.get(inputLine.size()-1).equals("ln")) {
+                inputLine.set(inputLine.size() - 1,
+                        inputLine.get(inputLine.size() - 1).substring(0, inputLine.get(inputLine.size() - 1).length() - 1));
+            }
+            else{
+                inputLine.set(inputLine.size() - 1,
+                        inputLine.get(inputLine.size() - 1).substring(0, inputLine.get(inputLine.size() - 1).length() - 2));
+            }
+            if (inputLine.get(inputLine.size()-1).equals("")){
+                inputLine.remove(inputLine.size()-1);
+            }
+            if (inputTV.getText().length() > 0) {
+                hintResult(v);
             }
         }
-        printResult(v);
     }
 
     public void clearAll(View v){
         TextView inputTV = findViewById(R.id.inputView);
+        TextView outputTV = findViewById(R.id.outputView);
+        if (enterPressed) {
+            outputTV.setTextSize(24);
+            ColorStateList c = outputTV.getTextColors();
+            outputTV.setTextColor(inputTV.getTextColors());
+            inputTV.setTextSize(32);
+            inputTV.setTextColor(c);
+            enterPressed = false;
+            clearAll(v);
+        }
         inputLine.clear();
+        inputLine.add("0");
         inputTV.setText("0");
+        hintResult(v);
     }
 }
